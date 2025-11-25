@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Johnson - Full Stack Developer Portfolio</title>
+    <!-- Basic SEO and Accessibility -->
+    <meta name="description" content="Personal portfolio and resume of Alex Johnson, showcasing full stack development projects and skills in pure HTML, CSS, and JavaScript.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+
+    <style>
+        /* CSS Reset & Variables */
+        :root {
+            --color-primary: #1e40af; /* Blue-700 */
+            --color-secondary: #059669; /* Emerald-600 */
+            --color-text-light: #f9fafb; /* Gray-50 */
+            --color-text-dark: #1f2937; /* Gray-800 */
+            --color-background: #ffffff;
+            --color-card-bg: #f3f4f6; /* Gray-100 */
+            --color-border: #d1d5db; /* Gray-300 */
+            --font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --container-max-width: 1200px;
+        }
+
+        /* Dark Mode Override Variables (JS will apply .dark-mode class to <body>) */
+        body.dark-mode {
+            --color-text-light: #1f2937;
+            --color-text-dark: #f9fafb;
+            --color-background: #111827; /* Gray-900 */
+            --color-card-bg: #1f2937; /* Gray-800 */
+            --color-border: #4b5563; /* Gray-600 */
+        }
+
+        /* Base Styling */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--color-text-dark);
+            background-color: var(--color-background);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        a {
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        a:hover, a:focus {
+            color: var(--color-secondary);
+            outline: none;
+        }
+
+        /* Layout & Reusables */
+        .container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .section-padding {
+            padding: 4rem 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: var(--color-text-light);
+        }
+
+        .btn-primary:hover, .btn-primary:focus {
+            background-color: #1d4ed8; /* Darker blue */
+            transform: translateY(-1px);
+        }
+
+        /* Header and Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            background-color: var(--color-background);
+            border-bottom: 1px solid var(--color-border);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-text-dark);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--color-text-dark);
+            font-weight: 500;
+            padding: 0.5rem 0;
+        }
+
+        /* Hamburger Menu (Mobile Only) */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: var(--color-text-dark);
+            margin: 4px 0;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Theme Toggle Button */
+        #theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--color-text-dark);
+            margin-left: 1rem;
+            transition: color 0.2s;
+        }
+
+        #theme-toggle:focus {
+            outline: 2px solid var(--color-secondary);
+            outline-offset: 2px;
+        }
+
+        /* Mobile Navigation Overlay */
+        .nav-links.active {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 60px; /* Adjust based on header height */
+            right: 0;
+            left: 0;
+            background-color: var(--color-background);
+            border-top: 1px solid var(--color-border);
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-links.active li {
+            margin: 0.5rem 1rem;
+            text-align: center;
+        }
+
+        /* Hero/Home Section */
+        #home {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: #4b5563;
+        }
+        
+        body.dark-mode .hero-content p {
+             color: #9ca3af;
+        }
+
+        /* About Section */
+        #about-me .container {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--color-primary);
+            flex-shrink: 0;
+        }
+
+        .about-text h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 3px solid var(--color-secondary);
+            display: inline-block;
+            padding-bottom: 0.25rem;
+        }
+
+        /* Projects Section */
+        #projects h2, #contact h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--color-card-bg);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card h3 {
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card .tags {
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            color: #4b5563;
+        }
+        
+        body.dark-mode .project-card .tags {
+            color: #9ca3af;
+        }
+
+        .read-more-content {
+            display: none;
+        }
+
+        .read-more-toggle {
+            background: none;
+            border: none;
+            color: var(--color-secondary);
+            cursor: pointer;
+            font-weight: 600;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            text-align: left;
+        }
+
+        .read-more-toggle:focus {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+
+        /* Contact Section */
+        #contact .container {
+            max-width: 600px;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-top: 1rem;
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--color-border);
+            border-radius: 0.5rem;
+            background-color: var(--color-background);
+            color: var(--color-text-dark);
+        }
+
+        .contact-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .contact-form .btn {
+            width: 100%;
+            margin-top: 1.5rem;
+        }
+
+        .form-message {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            display: none;
+            background-color: #d1fae5; /* Green-100 */
+            color: #065f46; /* Green-800 */
+            border: 1px solid #34d399; /* Green-400 */
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid var(--color-border);
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+        
+        body.dark-mode footer {
+            color: #9ca3af;
+        }
+
+        /* Media Queries for Responsiveness */
+
+        /* Tablet (768px and up) */
+        @media (min-width: 768px) {
+            .hero-content h1 {
+                font-size: 4rem;
+            }
+
+            .hero-content p {
+                font-size: 1.5rem;
+            }
+
+            .about-text {
+                flex: 1;
+                min-width: 400px;
+            }
+        }
+
+        /* Mobile (Max 767px) - Hide desktop navigation, show hamburger */
+        @media (max-width: 767px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                width: 100%;
+                left: 0;
+                top: 60px; /* Assuming 60px header height */
+            }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="nav-container">
+            <span class="logo">Alex Johnson</span>
+            <nav>
+                <ul class="nav-links" id="nav-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about-me">About Me</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button id="theme-toggle" aria-label="Toggle dark/light mode">
+                <span id="theme-icon">🌙</span> <!-- Moon icon for default light mode -->
+            </button>
+            <div class="hamburger" id="hamburger-menu" aria-label="Toggle navigation menu">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. Home Section -->
+        <section id="home" class="section-padding">
+            <div class="container hero-content">
+                <h1>Hello, I'm Alex Johnson.</h1>
+                <p>I build elegant, accessible, and high-performance web applications using pure front-end technology. Let's make something great together.</p>
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+            </div>
+        </section>
+
+        <!-- 2. About Me Section -->
+        <section id="about-me" class="section-padding">
+            <div class="container">
+                <img src="https://placehold.co/150x150/d1d5db/374151?text=AJ" alt="Professional headshot of Alex Johnson" class="profile-pic">
+                <div class="about-text">
+                    <h2>About Me</h2>
+                    <p>I am a passionate Full Stack Developer with 5 years of experience specializing in JavaScript ecosystems. My core philosophy is rooted in building efficient, maintainable, and highly responsive user interfaces. While I specialize in modern tools, my foundation is built on mastering the fundamentals of HTML5, CSS3, and Vanilla JavaScript—the true building blocks of the web.</p>
+                    <p>I thrive on solving complex problems and turning creative ideas into functional realities. Beyond the code, I am committed to accessibility, ensuring all my projects meet WCAG guidelines.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Projects Section (Min 3 required) -->
+        <section id="projects" class="section-padding">
+            <div class="container">
+                <h2>Featured Projects</h2>
+                <div class="project-grid">
+                    <!-- Project 1: Collaborative Drawing Tool -->
+                    <div class="project-card" data-category="JS">
+                        <h3>Collaborative Canvas</h3>
+                        <p>A real-time drawing application built to showcase complex DOM manipulation and event handling without external libraries.</p>
+                        <div class="read-more-content" id="read-more-project-1">
+                            <p>This project features custom-implemented drag-and-drop functionality, undo/redo state management, and basic user authentication logic simulation. It was a key learning experience in minimizing DOM reflows and optimizing performance in a highly interactive setting.</p>
+                        </div>
+                        <button class="read-more-toggle" data-target="read-more-project-1">Read More</button>
+                        <div class="tags">Tags: JavaScript, HTML5 Canvas, Data Persistence Simulation</div>
+                    </div>
+
+                    <!-- Project 2: Responsive E-Commerce Mockup -->
+                    <div class="project-card" data-category="CSS">
+                        <h3>Fluid Mart</h3>
+                        <p>A fully responsive e-commerce product page mockup designed purely with advanced CSS Grid and Flexbox techniques.</p>
+                        <div class="read-more-content" id="read-more-project-2">
+                            <p>The layout is optimized for four major breakpoints (mobile, tablet, small desktop, large desktop). Key CSS features include custom properties (variables), calc() functions, and media queries for image resolution switching. The goal was 100% responsiveness without any framework.</p>
+                        </div>
+                        <button class="read-more-toggle" data-target="read-more-project-2">Read More</button>
+                        <div class="tags">Tags: CSS3, Responsiveness, Accessibility, Semantic HTML</div>
+                    </div>
+
+                    <!-- Project 3: Vanilla JS Quiz Application -->
+                    <div class="project-card" data-category="JS">
+                        <h3>Developer Quiz Master</h3>
+                        <p>An interactive quiz app that loads questions from a local JSON object and tracks user scores dynamically.</p>
+                        <div class="read-more-content" id="read-more-project-3">
+                            <p>This application focuses on state management in Vanilla JS. It utilizes a simple state object to manage the current question index, score, and timer. Error handling is included to ensure the quiz gracefully handles invalid answer submissions.</p>
+                        </div>
+                        <button class="read-more-toggle" data-target="read-more-project-3">Read More</button>
+                        <div class="tags">Tags: JavaScript, DOM Manipulation, Local Storage, JSON</div>
+                    </div>
+
+                    <!-- Additional Feature: Project Filter (JS Feature) -->
+                    <div class="project-card filter-card">
+                        <h3>Filter Projects</h3>
+                        <p>Quickly find projects by core technology:</p>
+                        <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                            <button class="btn btn-primary filter-btn" data-filter="all">All</button>
+                            <button class="btn btn-primary filter-btn" data-filter="JS">JavaScript</button>
+                            <button class="btn btn-primary filter-btn" data-filter="CSS">CSS</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Contact Section -->
+        <section id="contact" class="section-padding">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <p style="text-align: center; margin-bottom: 2rem;">Have a project or a question? Send me a message!</p>
+                
+                <form class="contact-form" id="contact-form">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required aria-required="true" placeholder="Your Name">
+
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required aria-required="true" placeholder="your.email@example.com">
+
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required aria-required="true" placeholder="Project Inquiry">
+
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required aria-required="true" placeholder="I'd love to chat about..."></textarea>
+
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+
+                    <div id="form-message" class="form-message" role="alert"></div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> Alex Johnson. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Features Implementation -->
+    <script>
+        // --- Core Application State & Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // JS Feature 1: Dynamic Footer Year
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // JS Feature 2: Mobile Navigation Toggle
+            setupMobileNav();
+
+            // JS Feature 3: Dark/Light Mode Toggle
+            setupThemeToggle();
+
+            // JS Feature 4: Contact Form Client-Side Validation & Submission Simulation
+            setupContactForm();
+            
+            // JS Feature 5: "Read More" Toggle Functionality
+            setupReadMoreToggles();
+
+            // JS Feature 6: Project Filtering
+            setupProjectFiltering();
+            
+            // JS Feature 7: Smooth Scrolling for internal links (Ensures cross-browser support, enhancing native CSS behavior)
+            setupSmoothScrolling();
+        });
+
+
+        // ------------------------------------
+        // JAVASCRIPT FEATURES (7 Total)
+        // ------------------------------------
+
+
+        // Feature 2: Mobile Navigation Toggle
+        function setupMobileNav() {
+            const hamburger = document.getElementById('hamburger-menu');
+            const navMenu = document.getElementById('nav-menu');
+
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                // Accessibility: Toggle aria-expanded
+                const isExpanded = navMenu.classList.contains('active');
+                hamburger.setAttribute('aria-expanded', isExpanded);
+            });
+
+            // Close menu when a link is clicked (for single-page navigation)
+            navMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', false);
+                });
+            });
+        }
+
+        // Feature 3: Dark/Light Mode Toggle
+        function setupThemeToggle() {
+            const toggleButton = document.getElementById('theme-toggle');
+            const icon = document.getElementById('theme-icon');
+            const body = document.body;
+            const darkIcon = '☀️';
+            const lightIcon = '🌙';
+
+            // Check for saved preference or system preference
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const savedTheme = localStorage.getItem('theme');
+
+            if (savedTheme === 'dark' || (savedTheme === null && prefersDark)) {
+                body.classList.add('dark-mode');
+                icon.textContent = darkIcon;
+            } else {
+                icon.textContent = lightIcon;
+            }
+
+            toggleButton.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                
+                const isDarkMode = body.classList.contains('dark-mode');
+                
+                // Update icon and local storage
+                icon.textContent = isDarkMode ? darkIcon : lightIcon;
+                localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            });
+        }
+
+        // Feature 4: Contact Form Client-Side Validation & Submission Simulation
+        function setupContactForm() {
+            const form = document.getElementById('contact-form');
+            const messageBox = document.getElementById('form-message');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Reset message box
+                messageBox.style.display = 'none';
+                messageBox.className = 'form-message'; // Reset classes
+
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const message = document.getElementById('message').value.trim();
+
+                // Simple validation checks
+                if (name === '' || email === '' || message === '') {
+                    displayMessage('Please fill out all required fields.', 'error');
+                    return;
+                }
+
+                if (!validateEmail(email)) {
+                    displayMessage('Please enter a valid email address.', 'error');
+                    return;
+                }
+                
+                // Simulate form submission
+                form.querySelector('button[type="submit"]').textContent = 'Sending...';
+                
+                // Simulate network latency (2 seconds)
+                setTimeout(() => {
+                    form.reset();
+                    form.querySelector('button[type="submit"]').textContent = 'Send Message';
+                    displayMessage('Thank you for your message! I will be in touch soon.', 'success');
+                }, 2000);
+            });
+
+            function validateEmail(email) {
+                // Basic regex for email validation
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(String(email).toLowerCase());
+            }
+
+            function displayMessage(text, type) {
+                messageBox.textContent = text;
+                messageBox.style.display = 'block';
+                
+                // Change style based on message type
+                if (type === 'error') {
+                    messageBox.style.backgroundColor = '#fee2e2'; /* Red-100 */
+                    messageBox.style.color = '#991b1b'; /* Red-800 */
+                    messageBox.style.borderColor = '#fca5a5'; /* Red-400 */
+                } else if (type === 'success') {
+                    messageBox.style.backgroundColor = '#d1fae5'; /* Green-100 */
+                    messageBox.style.color = '#065f46'; /* Green-800 */
+                    messageBox.style.borderColor = '#34d399'; /* Green-400 */
+                }
+            }
+        }
+
+        // Feature 5: "Read More" Toggle Functionality
+        function setupReadMoreToggles() {
+            document.querySelectorAll('.read-more-toggle').forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const content = document.getElementById(targetId);
+                    
+                    if (content.style.display === 'none' || content.style.display === '') {
+                        content.style.display = 'block';
+                        this.textContent = 'Read Less';
+                        this.setAttribute('aria-expanded', 'true');
+                    } else {
+                        content.style.display = 'none';
+                        this.textContent = 'Read More';
+                        this.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
+        }
+
+        // Feature 6: Project Filtering
+        function setupProjectFiltering() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card[data-category]');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Update active button style
+                    filterButtons.forEach(btn => btn.classList.remove('active-filter'));
+                    this.classList.add('active-filter');
+
+                    projectCards.forEach(card => {
+                        const category = card.getAttribute('data-category');
+                        
+                        if (filter === 'all' || category === filter) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Set 'All' button active by default
+            document.querySelector('.filter-btn[data-filter="all"]').classList.add('active-filter');
+        }
+
+        // Feature 7: Smooth Scrolling for internal links (Polyfill-like)
+        function setupSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    // Check if native scroll-behavior: smooth is supported or if we need polyfill
+                    // We execute this to override any native behavior for a consistent, custom feel
+                    // while ensuring the browser defaults to native if our JS fails.
+                    if (this.hostname === location.hostname && this.pathname === location.pathname) {
+                        e.preventDefault();
+                        const targetElement = document.querySelector(this.hash);
+                        if (targetElement) {
+                             targetElement.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+        }
+
+        // Bonus JS Feature 8 (for extra points): Active Navigation Highlighting (Not used in list above, but implemented)
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            let current = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 70; // Offset for sticky header
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(a => {
+                a.classList.remove('active-link');
+                if (a.getAttribute('href').includes(current)) {
+                    a.classList.add('active-link');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
