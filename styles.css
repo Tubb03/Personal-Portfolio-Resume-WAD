@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Johnson - Full Stack Developer Portfolio</title>
+    <!-- Basic SEO and Accessibility -->
+    <meta name="description" content="Personal portfolio and resume of Alex Johnson, showcasing full stack development projects and skills in pure HTML, CSS, and JavaScript.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+    
+    <!-- LINKING EXTERNAL CSS FILE -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="nav-container">
+            <span class="logo">Alex Johnson</span>
+            <nav>
+                <ul class="nav-links" id="nav-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about-me">About Me</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button id="theme-toggle" aria-label="Toggle dark/light mode">
+                <span id="theme-icon">🌙</span> <!-- Moon icon for default light mode -->
+            </button>
+            <div class="hamburger" id="hamburger-menu" aria-label="Toggle navigation menu">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. Home Section -->
+        <section id="home" class="section-padding">
+            <div class="container hero-content">
+                <h1>Hello, I'm Alex Johnson.</h1>
+                <p>I build elegant, accessible, and high-performance web applications using pure front-end technology. Let's make something great together.</p>
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+            </div>
+        </section>
+
+        <!-- 2. About Me Section -->
+        <section id="about-me" class="section-padding">
+            <div class="container">
+                <img src="https://placehold.co/150x150/d1d5db/374151?text=AJ" alt="Professional headshot of Alex Johnson" class="profile-pic">
+                <div class="about-text">
+                    <h2>About Me</h2>
+                    <p>I am a passionate Full Stack Developer with 5 years of experience specializing in JavaScript ecosystems. My core philosophy is rooted in building efficient, maintainable, and highly responsive user interfaces. While I specialize in modern tools, my foundation is built on mastering the fundamentals of HTML5, CSS3, and Vanilla JavaScript—the true building blocks of the web.</p>
+                    <p>I thrive on solving complex problems and turning creative ideas into functional realities. Beyond the code, I am committed to accessibility, ensuring all my projects meet WCAG guidelines.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Projects Section (Min 3 required) -->
+        <section id="projects" class="section-padding">
+            <div class="container">
+                <h2>Featured Projects</h2>
+                <div class="project-grid">
+                    <!-- Project 1: Collaborative Drawing Tool -->
+                    <div class="project-card" data-category="JS">
+                        <h3>Collaborative Canvas</h3>
+                        <p>A real-time drawing application built to showcase complex DOM manipulation and event handling without external libraries.</p>
+                        <div class="read-more-content" id="read-more-project-1">
+                            <p>This project features custom-implemented drag-and-drop functionality, undo/redo state management, and basic user authentication logic simulation. It was a key learning experience in minimizing DOM reflows and optimizing performance in a highly interactive setting.</p>
+                        </div>
+                        <button class="read-more-toggle" data-target="read-more-project-1">Read More</button>
+                        <div class="tags">Tags: JavaScript, HTML5 Canvas, Data Persistence Simulation</div>
+                    </div>
+
+                    <!-- Project 2: Responsive E-Commerce Mockup -->
+                    <div class="project-card" data-category="CSS">
+                        <h3>Fluid Mart</h3>
+                        <p>A fully responsive e-commerce product page mockup designed purely with advanced CSS Grid and Flexbox techniques.</p>
+                        <div class="read-more-content" id="read-more-project-2">
+                            <p>The layout is optimized for four major breakpoints (mobile, tablet, small desktop, large desktop). Key CSS features include custom properties (variables), calc() functions, and media queries for image resolution switching. The goal was 100% responsiveness without any framework.</p>
+                        </div>
+                        <button class="read-more-toggle" data-target="read-more-project-2">Read More</button>
+                        <div class="tags">Tags: CSS3, Responsiveness, Accessibility, Semantic HTML</div>
+                    </div>
+
+                    <!-- Project 3: Vanilla JS Quiz Application -->
+                    <div class="project-card" data-category="JS">
+                        <h3>Developer Quiz Master</h3>
+                        <p>An interactive quiz app that loads questions from a local JSON object and tracks user scores dynamically.</p>
+                        <div class="read-more-content" id="read-more-project-3">
+                            <p>This application focuses on state management in Vanilla JS. It utilizes a simple state object to manage the current question index, score, and timer. Error handling is included to ensure the quiz gracefully handles invalid answer submissions.</p>
+                        </div>
+                        <button class="read-more-toggle" data-target="read-more-project-3">Read More</button>
+                        <div class="tags">Tags: JavaScript, DOM Manipulation, Local Storage, JSON</div>
+                    </div>
+
+                    <!-- Additional Feature: Project Filter (JS Feature) -->
+                    <div class="project-card filter-card">
+                        <h3>Filter Projects</h3>
+                        <p>Quickly find projects by core technology:</p>
+                        <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                            <button class="btn btn-primary filter-btn" data-filter="all">All</button>
+                            <button class="btn btn-primary filter-btn" data-filter="JS">JavaScript</button>
+                            <button class="btn btn-primary filter-btn" data-filter="CSS">CSS</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Contact Section -->
+        <section id="contact" class="section-padding">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <p style="text-align: center; margin-bottom: 2rem;">Have a project or a question? Send me a message!</p>
+                
+                <form class="contact-form" id="contact-form">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required aria-required="true" placeholder="Your Name">
+
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required aria-required="true" placeholder="your.email@example.com">
+
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required aria-required="true" placeholder="Project Inquiry">
+
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required aria-required="true" placeholder="I'd love to chat about..."></textarea>
+
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+
+                    <div id="form-message" class="form-message" role="alert"></div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> Alex Johnson. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- LINKING EXTERNAL JAVASCRIPT FILE -->
+    <script src="script.js"></script>
+</body>
+</html>
